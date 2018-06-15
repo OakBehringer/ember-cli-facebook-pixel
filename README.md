@@ -1,7 +1,7 @@
 ember-cli-facebook-pixel
 ==============================================================================
 
-[Short description of the addon.]
+Plugin for ember-cli that injects Facebook Pixel tracking code into HTML <head> content. 
 
 Installation
 ------------------------------------------------------------------------------
@@ -14,37 +14,44 @@ ember install ember-cli-facebook-pixel
 Usage
 ------------------------------------------------------------------------------
 
-[Longer description of how to use the addon in apps.]
+Once your environment is configred to include your Pixel id (and the enabled flag is set to true), the Facebook 
+ Pixel tracking code will be injected into your index.html file.
+ 
+A service is provided for simple access to the global `fbq(...)` function inside of your Ember application.
+ This service allows you to call the global `fbq(...)` function regardless of your environment - if the 
+ Facebook Pixel code hasn't been injected in your head (consequently, the `fbq(...)` function 
+ is not available), the service will disregard the function call. 
+ 
+ ```js
+// environment.js
+ 
+var ENV = {
+	facebookPixel: {
+    	enabled: false,
+    	id: 'xxxxxxxxxxxxxxx'
+    }
+};
+ 
+if (environment === 'production') {
+	ENV.facebookPixel.enabled = true;
+}
+ ```
+ 
+```javascript
+import { inject } from '@ember/service';
 
+export default Ember.Component.extend({
+	facebookPixel: inject(),
+	
+	actions: {
+		buttonClicked() {
+			this.get('facebookPixel').fbq('track', 'SomeEventName');
+		}
+	}
+});
 
-Contributing
-------------------------------------------------------------------------------
+```
 
-### Installation
-
-* `git clone <repository-url>`
-* `cd ember-cli-facebook-pixel`
-* `npm install`
-
-### Linting
-
-* `npm run lint:js`
-* `npm run lint:js -- --fix`
-
-### Running tests
-
-* `ember test` – Runs the test suite on the current Ember version
-* `ember test --server` – Runs the test suite in "watch mode"
-* `ember try:each` – Runs the test suite against multiple Ember versions
-
-### Running the dummy application
-
-* `ember serve`
-* Visit the dummy application at [http://localhost:4200](http://localhost:4200).
-
-For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
-
-License
-------------------------------------------------------------------------------
-
-This project is licensed under the [MIT License](LICENSE.md).
+In the above example, the global `fbq(...)` function will be called in  the production environment, sending 
+ `fbq('track', 'SomeEventName')`. If in the development environment, the `fbq('track', 'SomeEventName')` will be
+ discarded; only a console.log statement (with the fbq parameters) will be called. 
