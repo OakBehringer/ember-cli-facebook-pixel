@@ -53,5 +53,5 @@ export default Ember.Component.extend({
 ```
 
 In the above example, the global `fbq(...)` function will be called in  the production environment, sending 
- `fbq('track', 'SomeEventName')`. If in the development environment, the `fbq('track', 'SomeEventName')` will be
+ `fbq('track', 'SomeEventName')`. If in the development environment, `fbq('track', 'SomeEventName')` will be
  discarded; only a console.log statement (with the fbq parameters) will be called. 
