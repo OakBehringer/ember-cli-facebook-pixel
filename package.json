@@ -1,9 +1,12 @@
 {
   "name": "ember-cli-facebook-pixel",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "0.0.1",
+  "description": "Facebook Pixel functionality for ember apps.",
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "facebook",
+    "pixel",
+    "facebook-pixel"
   ],
   "repository": "",
   "license": "MIT",
