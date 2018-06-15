@@ -10,7 +10,7 @@ export default Ember.Service.extend({
       return fbq(...arguments);
     }
     else {
-      console.log('fbq not found, function not called: ', ...arguments);
+      console.warn('fbq not found, function not called: ', ...arguments);
     }
 
     return null;

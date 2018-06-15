@@ -10,7 +10,7 @@
   ],
   "repository": "",
   "license": "MIT",
-  "author": "",
+  "author": "Adam Kosecki",
   "directories": {
     "doc": "doc",
     "test": "tests"
